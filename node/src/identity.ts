@@ -30,6 +30,9 @@ async function main() {
   let v4Identity: V4.Identity
   let exportedV4Identity: string
 
+  const message = "Message to sign"
+  let signature: any
+
   bench
     .add("V3 - Create non-deterministic Identity", async () => {
       new Identity()
@@ -89,6 +92,29 @@ async function main() {
         }
       }
     )
+    .add(
+      "V4 - Sign Message",
+      async () => {
+        v4Identity.signMessage(message)
+      },
+      {
+        beforeAll: () => {
+          v4Identity = new V4.Identity()
+        }
+      }
+    )
+    .add(
+      "V4 - Verify Signature",
+      async () => {
+        V4.Identity.verifySignature(message, signature, v4Identity.publicKey)
+      },
+      {
+        beforeAll: () => {
+          v4Identity = new V4.Identity()
+          signature = v4Identity.signMessage(message)
+        }
+      }
+    )
 
   await bench.warmup()
   await bench.run()
@@ -101,6 +127,11 @@ async function main() {
   table.map((rowInfo, i) => {
     if (rowInfo && !(rowInfo["Function"] as string).includes("V4")) {
       rowInfo["Relative to V3"] = ""
+    } else if (
+      (rowInfo && (rowInfo["Function"] as string).includes("Sign")) ||
+      (rowInfo && (rowInfo["Function"] as string).includes("Verify"))
+    ) {
+      rowInfo["Relative to V3"] = "N/A"
     } else if (rowInfo) {
       const v3AvgExecTime = bench.tasks[i - 1].result?.mean
 

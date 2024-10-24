@@ -69,7 +69,7 @@ async function main() {
       }
     )
     .add(
-      "V3 - Recover Identity",
+      "V3 - Import Identity",
       async () => {
         new Identity(exportedV3Identity)
       },
@@ -81,7 +81,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Recover Identity",
+      "V4 - Import Identity",
       async () => {
         V4.Identity.import(exportedV4Identity)
       },

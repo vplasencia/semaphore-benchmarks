@@ -11,6 +11,7 @@ export default function Home() {
   const getTableInfo = async () => {
     setLoading(true)
     const benchmarksInfo = await generateBenchmarks()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setTableInfo(benchmarksInfo as any)
     setLoading(false)
   }

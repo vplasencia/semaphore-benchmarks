@@ -18,9 +18,11 @@ const generateTable = (task: Task) => {
 }
 
 async function main() {
-  const samples = 100
+  // const samples = 100
 
-  const bench = new Bench({ time: 0, iterations: samples })
+  // const bench = new Bench({ time: 0, iterations: samples })
+
+  const bench = new Bench()
 
   const secretMessage = "secret-message"
 

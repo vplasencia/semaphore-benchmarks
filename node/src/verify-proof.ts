@@ -72,8 +72,8 @@ async function main() {
           memberV3 = new Identity()
           groupV3.addMember(memberV3.commitment)
           proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
-            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
-            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+            zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
           })
         }
       }
@@ -104,8 +104,8 @@ async function main() {
           const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
           proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
-            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
-            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+            zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
           })
         }
       }
@@ -137,8 +137,8 @@ async function main() {
           const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
           proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
-            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
-            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+            zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
           })
         }
       }
@@ -170,8 +170,8 @@ async function main() {
           const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
           proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
-            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
-            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+            zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
           })
         }
       }
@@ -203,8 +203,8 @@ async function main() {
           const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
           proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
-            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
-            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+            zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
           })
         }
       }

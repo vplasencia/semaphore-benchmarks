@@ -53,36 +53,48 @@ async function main() {
   let membersV4: bigint[]
 
   bench
-    .add("V3 - Generate Proof Empty Group", async () => {
-      generateProof(memberV3, groupV3, 1, 1)
-    },
-    {
-      beforeAll: () => {
-        groupV3 = new Group(1, 16, [])
-        memberV3 = new Identity()
-        groupV3.addMember(memberV3.commitment)
+    .add(
+      "V3 - Generate Proof Empty Group",
+      async () => {
+        await generateProof(memberV3, groupV3, 1, 1, {
+          zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+          wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+        })
+      },
+      {
+        beforeAll: () => {
+          groupV3 = new Group(1, 16, [])
+          memberV3 = new Identity()
+          groupV3.addMember(memberV3.commitment)
+        }
       }
-    })
-    .add("V4 - Generate Proof Empty Group", async () => {
-      V4.generateProof(memberV4, groupV4, 1, 1)
-    },
-    {
-      beforeAll: () => {
-        groupV4 = new V4.Group([])
-        memberV4 = new V4.Identity()
-        groupV4.addMember(memberV4.commitment)
+    )
+    .add(
+      "V4 - Generate Proof Empty Group",
+      async () => {
+        await V4.generateProof(memberV4, groupV4, 1, 1)
+      },
+      {
+        beforeAll: () => {
+          groupV4 = new V4.Group([])
+          memberV4 = new V4.Identity()
+          groupV4.addMember(memberV4.commitment)
+        }
       }
-    })
+    )
     .add(
       "V3 - Generate Proof 100 Members",
       async () => {
-        generateProof(memberV3, groupV3, 1, 1)
+        await generateProof(memberV3, groupV3, 1, 1, {
+          zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+          wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+        })
       },
       {
         beforeAll: () => {
           membersV3 = generateMembersV3(100)
           groupV3 = new Group(1, 16, membersV3)
-          const index = Math.floor(membersV3.length)
+          const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
         }
       }
@@ -90,13 +102,13 @@ async function main() {
     .add(
       "V4 - Generate Proof 100 Members",
       async () => {
-        V4.generateProof(memberV4, groupV4, 1, 1)
+        await V4.generateProof(memberV4, groupV4, 1, 1)
       },
       {
         beforeAll: () => {
           membersV4 = generateMembersV4(100)
           groupV4 = new V4.Group(membersV4)
-          const index = Math.floor(membersV4.length)
+          const index = Math.floor(membersV4.length / 2)
           memberV4 = new V4.Identity(index.toString())
         }
       }
@@ -104,13 +116,16 @@ async function main() {
     .add(
       "V3 - Generate Proof 500 Members",
       async () => {
-        generateProof(memberV3, groupV3, 1, 1)
+        await generateProof(memberV3, groupV3, 1, 1, {
+          zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+          wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+        })
       },
       {
         beforeAll: () => {
           membersV3 = generateMembersV3(500)
           groupV3 = new Group(1, 16, membersV3)
-          const index = Math.floor(membersV3.length)
+          const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
         }
       }
@@ -118,13 +133,13 @@ async function main() {
     .add(
       "V4 - Generate Proof 500 Members",
       async () => {
-        V4.generateProof(memberV4, groupV4, 1, 1)
+        await V4.generateProof(memberV4, groupV4, 1, 1)
       },
       {
         beforeAll: () => {
           membersV4 = generateMembersV4(500)
           groupV4 = new V4.Group(membersV4)
-          const index = Math.floor(membersV4.length)
+          const index = Math.floor(membersV4.length / 2)
           memberV4 = new V4.Identity(index.toString())
         }
       }
@@ -132,13 +147,16 @@ async function main() {
     .add(
       "V3 - Generate Proof 1000 Members",
       async () => {
-        generateProof(memberV3, groupV3, 1, 1)
+        await generateProof(memberV3, groupV3, 1, 1, {
+          zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+          wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+        })
       },
       {
         beforeAll: () => {
           membersV3 = generateMembersV3(1000)
           groupV3 = new Group(1, 16, membersV3)
-          const index = Math.floor(membersV3.length)
+          const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
         }
       }
@@ -146,13 +164,13 @@ async function main() {
     .add(
       "V4 - Generate Proof 1000 Members",
       async () => {
-        V4.generateProof(memberV4, groupV4, 1, 1)
+        await V4.generateProof(memberV4, groupV4, 1, 1)
       },
       {
         beforeAll: () => {
           membersV4 = generateMembersV4(1000)
           groupV4 = new V4.Group(membersV4)
-          const index = Math.floor(membersV4.length)
+          const index = Math.floor(membersV4.length / 2)
           memberV4 = new V4.Identity(index.toString())
         }
       }
@@ -160,13 +178,16 @@ async function main() {
     .add(
       "V3 - Generate Proof 2000 Members",
       async () => {
-        generateProof(memberV3, groupV3, 1, 1)
+        await generateProof(memberV3, groupV3, 1, 1, {
+          zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+          wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+        })
       },
       {
         beforeAll: () => {
           membersV3 = generateMembersV3(2000)
           groupV3 = new Group(1, 16, membersV3)
-          const index = Math.floor(membersV3.length)
+          const index = Math.floor(membersV3.length / 2)
           memberV3 = new Identity(index.toString())
         }
       }
@@ -174,13 +195,13 @@ async function main() {
     .add(
       "V4 - Generate Proof 2000 Members",
       async () => {
-        V4.generateProof(memberV4, groupV4, 1, 1)
+        await V4.generateProof(memberV4, groupV4, 1, 1)
       },
       {
         beforeAll: () => {
           membersV4 = generateMembersV4(2000)
           groupV4 = new V4.Group(membersV4)
-          const index = Math.floor(membersV4.length)
+          const index = Math.floor(membersV4.length / 2)
           memberV4 = new V4.Identity(index.toString())
         }
       }

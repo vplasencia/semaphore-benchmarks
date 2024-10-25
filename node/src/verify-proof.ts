@@ -1,6 +1,11 @@
 import { Bench, Task } from "tinybench"
 import { Identity } from "@semaphore-protocol/identity"
 import { Group } from "@semaphore-protocol/group"
+import {
+  generateProof,
+  verifyProof,
+  SemaphoreProof
+} from "@semaphore-protocol/proof"
 import * as V4 from "@semaphore-protocol/core"
 
 const generateTable = (task: Task) => {
@@ -39,9 +44,9 @@ async function main() {
     ).map(({ commitment }) => commitment)
   }
 
-  const memberV3 = new Identity().commitment
+  let memberV3: Identity
 
-  const memberV4 = new V4.Identity().commitment
+  let memberV4: V4.Identity
 
   let groupV3: Group
 
@@ -51,122 +56,171 @@ async function main() {
 
   let membersV4: bigint[]
 
+  let proofV3: SemaphoreProof
+
+  let proofV4: V4.SemaphoreProof
+
   bench
     .add(
-      "V3 - Add Member Empty Group",
+      "V3 - Generate Proof Empty Group",
       async () => {
-        groupV3.addMember(memberV3)
+        await verifyProof(proofV3, groupV3.depth)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           groupV3 = new Group(1, 16, [])
+          memberV3 = new Identity()
+          groupV3.addMember(memberV3.commitment)
+          proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
+            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+          })
         }
       }
     )
     .add(
-      "V4 - Add Member Empty Group",
+      "V4 - Generate Proof Empty Group",
       async () => {
-        groupV4.addMember(memberV4)
+        await V4.verifyProof(proofV4)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           groupV4 = new V4.Group([])
+          memberV4 = new V4.Identity()
+          groupV4.addMember(memberV4.commitment)
+          proofV4 = await V4.generateProof(memberV4, groupV4, 1, 1)
         }
       }
     )
     .add(
-      "V3 - Add Member 100 Members",
+      "V3 - Generate Proof 100 Members",
       async () => {
-        groupV3.addMember(memberV3)
+        await verifyProof(proofV3, groupV3.depth)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV3 = generateMembersV3(100)
           groupV3 = new Group(1, 16, membersV3)
+          const index = Math.floor(membersV3.length / 2)
+          memberV3 = new Identity(index.toString())
+          proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
+            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+          })
         }
       }
     )
     .add(
-      "V4 - Add Member 100 Members",
+      "V4 - Generate Proof 100 Members",
       async () => {
-        groupV4.addMember(memberV4)
+        await V4.verifyProof(proofV4)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV4 = generateMembersV4(100)
           groupV4 = new V4.Group(membersV4)
+          const index = Math.floor(membersV4.length / 2)
+          memberV4 = new V4.Identity(index.toString())
+          proofV4 = await V4.generateProof(memberV4, groupV4, 1, 1)
         }
       }
     )
     .add(
-      "V3 - Add Member 500 Members",
+      "V3 - Generate Proof 500 Members",
       async () => {
-        groupV3.addMember(memberV3)
+        await verifyProof(proofV3, groupV3.depth)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV3 = generateMembersV3(500)
           groupV3 = new Group(1, 16, membersV3)
+          const index = Math.floor(membersV3.length / 2)
+          memberV3 = new Identity(index.toString())
+          proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
+            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+          })
         }
       }
     )
     .add(
-      "V4 - Add Member 500 Members",
+      "V4 - Generate Proof 500 Members",
       async () => {
-        groupV4.addMember(memberV4)
+        await V4.verifyProof(proofV4)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV4 = generateMembersV4(500)
           groupV4 = new V4.Group(membersV4)
+          const index = Math.floor(membersV4.length / 2)
+          memberV4 = new V4.Identity(index.toString())
+          proofV4 = await V4.generateProof(memberV4, groupV4, 1, 1)
         }
       }
     )
     .add(
-      "V3 - Add Member 1000 Members",
+      "V3 - Generate Proof 1000 Members",
       async () => {
-        groupV3.addMember(memberV3)
+        await verifyProof(proofV3, groupV3.depth)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV3 = generateMembersV3(1000)
           groupV3 = new Group(1, 16, membersV3)
+          const index = Math.floor(membersV3.length / 2)
+          memberV3 = new Identity(index.toString())
+          proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
+            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+          })
         }
       }
     )
     .add(
-      "V4 - Add Member 1000 Members",
+      "V4 - Generate Proof 1000 Members",
       async () => {
-        groupV4.addMember(memberV4)
+        await V4.verifyProof(proofV4)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV4 = generateMembersV4(1000)
           groupV4 = new V4.Group(membersV4)
+          const index = Math.floor(membersV4.length / 2)
+          memberV4 = new V4.Identity(index.toString())
+          proofV4 = await V4.generateProof(memberV4, groupV4, 1, 1)
         }
       }
     )
     .add(
-      "V3 - Add Member 2000 Members",
+      "V3 - Generate Proof 2000 Members",
       async () => {
-        groupV3.addMember(memberV3)
+        await verifyProof(proofV3, groupV3.depth)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV3 = generateMembersV3(2000)
           groupV3 = new Group(1, 16, membersV3)
+          const index = Math.floor(membersV3.length / 2)
+          memberV3 = new Identity(index.toString())
+          proofV3 = await generateProof(memberV3, groupV3, 1, 1, {
+            zkeyFilePath: "../v3-snark-artifacts/16/semaphore.zkey",
+            wasmFilePath: "../v3-snark-artifacts/16/semaphore.wasm"
+          })
         }
       }
     )
     .add(
-      "V4 - Add Member 2000 Members",
+      "V4 - Generate Proof 2000 Members",
       async () => {
-        groupV4.addMember(memberV4)
+        await V4.verifyProof(proofV4)
       },
       {
-        beforeAll: () => {
+        beforeAll: async () => {
           membersV4 = generateMembersV4(2000)
           groupV4 = new V4.Group(membersV4)
+          const index = Math.floor(membersV4.length / 2)
+          memberV4 = new V4.Identity(index.toString())
+          proofV4 = await V4.generateProof(memberV4, groupV4, 1, 1)
         }
       }
     )

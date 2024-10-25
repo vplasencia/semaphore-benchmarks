@@ -1,101 +1,74 @@
-import Image from "next/image"
+"use client"
+
+import { useState } from "react"
+import { generateBenchmarks } from "../utils/generate-benchmarks"
+import Table from "../components/Table"
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [tableInfo, setTableInfo] = useState()
+  const [loading, setLoading] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const getTableInfo = async () => {
+    setLoading(true)
+    const benchmarksInfo = await generateBenchmarks()
+    setTableInfo(benchmarksInfo as any)
+    setLoading(false)
+  }
+
+  const downloadData = async () => {
+    const filename = "functions-browser"
+
+    const jsonStr = JSON.stringify(tableInfo, null, 2)
+    const dataUri = `data:text/json;charset=utf-8,${encodeURIComponent(jsonStr)}`
+    const link = document.createElement("a")
+    link.href = dataUri
+    link.download = `${filename}.json`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  return (
+    <div className="flex flex-col min-h-screen px-2 text-slate-950">
+      <div className="mb-auto">
+        <div className="flex flex-col justify-center items-center my-10">
+          <div className="w-96 text-xl text-center">
+            Generate browser benchmarks for Semaphore V3 and Semaphore V4.
+          </div>
+          <div className="mt-5 flex flex-col justify-center items-center">
+            <button
+              onClick={getTableInfo}
+              className="w-full mt-5 rounded-md border-2 border-indigo-700 bg-indigo-700 py-3 px-5 font-semibold hover:bg-indigo-600 transition-colors duration-150 text-white"
+            >
+              Generate Benchmarks
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div>
+          {loading ? (
+            <div className="flex justify-center items-center space-x-3">
+              <div className="loader"></div>
+              <div>Generating benchmarks</div>
+            </div>
+          ) : tableInfo ? (
+            <div>
+              <div className="flex justify-center items-center mb-10">
+                <button
+                  className="max-w-fit rounded-md border-2 border-indigo-700 text-indigo-700 py-3 px-5 font-semibold"
+                  onClick={downloadData}
+                >
+                  Download Benchmarks
+                </button>
+              </div>
+              <div className="flex justify-center items-center my-5">
+                <Table data={tableInfo} />
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

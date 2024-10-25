@@ -19,7 +19,7 @@ const generateTable = (task: Task) => {
   }
 }
 
-async function main() {
+export async function generateBenchmarks() {
   //   const samples = 100
 
   //   const bench = new Bench({ time: 0, iterations: samples })
@@ -52,14 +52,40 @@ async function main() {
 
   let membersV4: bigint[]
 
+  const secretMessage = "secret-message"
+
+  let v4Identity: V4.Identity
+
+  const message = "Message to sign"
+
   bench
+    .add("V3 - Create non-deterministic Identity", async () => {
+      new Identity()
+    })
+    .add("V4 - Create non-deterministic Identity", async () => {
+      new V4.Identity()
+    })
+    .add("V3 - Create deterministic Identity", async () => {
+      new Identity(secretMessage)
+    })
+    .add("V4 - Create deterministic Identity", async () => {
+      new V4.Identity(secretMessage)
+    })
+    .add(
+      "V4 - Sign Message",
+      async () => {
+        v4Identity.signMessage(message)
+      },
+      {
+        beforeAll: () => {
+          v4Identity = new V4.Identity()
+        }
+      }
+    )
     .add(
       "V3 - Generate Proof Empty Group",
       async () => {
-        await generateProof(memberV3, groupV3, 1, 1, {
-          zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
-          wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
-        })
+        await generateProof(memberV3, groupV3, 1, 1)
       },
       {
         beforeAll: () => {
@@ -85,10 +111,7 @@ async function main() {
     .add(
       "V3 - Generate Proof 100 Members",
       async () => {
-        await generateProof(memberV3, groupV3, 1, 1, {
-          zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
-          wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
-        })
+        await generateProof(memberV3, groupV3, 1, 1)
       },
       {
         beforeAll: () => {
@@ -116,10 +139,7 @@ async function main() {
     .add(
       "V3 - Generate Proof 500 Members",
       async () => {
-        await generateProof(memberV3, groupV3, 1, 1, {
-          zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
-          wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
-        })
+        await generateProof(memberV3, groupV3, 1, 1)
       },
       {
         beforeAll: () => {
@@ -147,10 +167,7 @@ async function main() {
     .add(
       "V3 - Generate Proof 1000 Members",
       async () => {
-        await generateProof(memberV3, groupV3, 1, 1, {
-          zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
-          wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
-        })
+        await generateProof(memberV3, groupV3, 1, 1)
       },
       {
         beforeAll: () => {
@@ -178,10 +195,7 @@ async function main() {
     .add(
       "V3 - Generate Proof 2000 Members",
       async () => {
-        await generateProof(memberV3, groupV3, 1, 1, {
-          zkeyFilePath: "./v3-snark-artifacts/16/semaphore.zkey",
-          wasmFilePath: "./v3-snark-artifacts/16/semaphore.wasm"
-        })
+        await generateProof(memberV3, groupV3, 1, 1)
       },
       {
         beforeAll: () => {
@@ -218,6 +232,8 @@ async function main() {
   table.map((rowInfo, i) => {
     if (rowInfo && !(rowInfo["Function"] as string).includes("V4")) {
       rowInfo["Relative to V3"] = ""
+    } else if (rowInfo && (rowInfo["Function"] as string).includes("Sign")) {
+      rowInfo["Relative to V3"] = "N/A"
     } else if (rowInfo) {
       const v3AvgExecTime = bench.tasks[i - 1].result?.mean
 
@@ -237,14 +253,9 @@ async function main() {
     }
   })
 
-  console.table(table)
+  // console.table(table)
 
   // console.log(bench.results)
-}
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+  return table
+}

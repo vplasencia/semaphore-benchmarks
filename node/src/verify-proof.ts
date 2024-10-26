@@ -62,7 +62,7 @@ async function main() {
 
   bench
     .add(
-      "V3 - Generate Proof Empty Group",
+      "V3 - Verify Proof Empty Group",
       async () => {
         await verifyProof(proofV3, groupV3.depth)
       },
@@ -79,7 +79,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Generate Proof Empty Group",
+      "V4 - Verify Proof Empty Group",
       async () => {
         await V4.verifyProof(proofV4)
       },
@@ -93,7 +93,7 @@ async function main() {
       }
     )
     .add(
-      "V3 - Generate Proof 100 Members",
+      "V3 - Verify Proof 100 Members",
       async () => {
         await verifyProof(proofV3, groupV3.depth)
       },
@@ -111,7 +111,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Generate Proof 100 Members",
+      "V4 - Verify Proof 100 Members",
       async () => {
         await V4.verifyProof(proofV4)
       },
@@ -126,7 +126,7 @@ async function main() {
       }
     )
     .add(
-      "V3 - Generate Proof 500 Members",
+      "V3 - Verify Proof 500 Members",
       async () => {
         await verifyProof(proofV3, groupV3.depth)
       },
@@ -144,7 +144,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Generate Proof 500 Members",
+      "V4 - Verify Proof 500 Members",
       async () => {
         await V4.verifyProof(proofV4)
       },
@@ -159,7 +159,7 @@ async function main() {
       }
     )
     .add(
-      "V3 - Generate Proof 1000 Members",
+      "V3 - Verify Proof 1000 Members",
       async () => {
         await verifyProof(proofV3, groupV3.depth)
       },
@@ -177,7 +177,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Generate Proof 1000 Members",
+      "V4 - Verify Proof 1000 Members",
       async () => {
         await V4.verifyProof(proofV4)
       },
@@ -192,7 +192,7 @@ async function main() {
       }
     )
     .add(
-      "V3 - Generate Proof 2000 Members",
+      "V3 - Verify Proof 2000 Members",
       async () => {
         await verifyProof(proofV3, groupV3.depth)
       },
@@ -210,7 +210,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Generate Proof 2000 Members",
+      "V4 - Verify Proof 2000 Members",
       async () => {
         await V4.verifyProof(proofV4)
       },

@@ -1,0 +1,66 @@
+[
+  {
+    "Function": "V3 - Create Empty Group",
+    "Gas Units": 1177464
+  },
+  {
+    "Function": "V4 - Create Empty Group",
+    "Gas Units": 91596
+  },
+  {
+    "Function": "V3 - Add Member Empty Group",
+    "Gas Units": 1648364
+  },
+  {
+    "Function": "V4 - Add Member Empty Group",
+    "Gas Units": 117970
+  },
+  {
+    "Function": "V3 - Add Member 10 Members",
+    "Gas Units": 888563
+  },
+  {
+    "Function": "V4 - Add Member 10 Members",
+    "Gas Units": 164262
+  },
+  {
+    "Function": "V3 - Add Member 30 Members",
+    "Gas Units": 883062
+  },
+  {
+    "Function": "V4 - Add Member 30 Members",
+    "Gas Units": 226677
+  },
+  {
+    "Function": "V3 - Add Members 10 Members",
+    "Gas Units": 7471268
+  },
+  {
+    "Function": "V4 - Add Members 10 Members",
+    "Gas Units": 745021
+  },
+  {
+    "Function": "V3 - Add Members 30 Members",
+    "Gas Units": 20395193
+  },
+  {
+    "Function": "V4 - Add Members 30 Members",
+    "Gas Units": 1895158
+  },
+  {
+    "Function": "V3 - Verify Proof 10 Members",
+    "Gas Units": 387806
+  },
+  {
+    "Function": "V4 - Validate Proof 10 Members",
+    "Gas Units": 285622
+  },
+  {
+    "Function": "V3 - Verify Proof 30 Members",
+    "Gas Units": 387806
+  },
+  {
+    "Function": "V4 - Validate Proof 30 Members",
+    "Gas Units": 285598
+  }
+]

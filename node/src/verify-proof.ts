@@ -62,7 +62,7 @@ async function main() {
 
   bench
     .add(
-      "V3 - Verify Proof Empty Group",
+      "V3 - Verify Proof 1 Member",
       async () => {
         await verifyProof(proofV3, groupV3.depth)
       },
@@ -79,7 +79,7 @@ async function main() {
       }
     )
     .add(
-      "V4 - Verify Proof Empty Group",
+      "V4 - Verify Proof 1 Member",
       async () => {
         await V4.verifyProof(proofV4)
       },

@@ -83,7 +83,7 @@ export async function generateBenchmarks() {
       }
     )
     .add(
-      "V3 - Generate Proof Empty Group",
+      "V3 - Generate Proof 1 Member",
       async () => {
         await generateProof(memberV3, groupV3, 1, 1)
       },
@@ -96,7 +96,7 @@ export async function generateBenchmarks() {
       }
     )
     .add(
-      "V4 - Generate Proof Empty Group",
+      "V4 - Generate Proof 1 Member",
       async () => {
         await V4.generateProof(memberV4, groupV4, 1, 1)
       },

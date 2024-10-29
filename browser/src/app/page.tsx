@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { generateBenchmarks } from "../utils/generate-benchmarks"
 import Table from "../components/Table"
+import ContractBenchmarks from "../components/ContractBenchmarks"
 
 export default function Home() {
   const [tableInfo, setTableInfo] = useState()
@@ -32,6 +33,9 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen px-2 text-slate-950">
       <div className="mb-auto">
+        <div className="flex justify-center items-center my-10">
+          <ContractBenchmarks />
+        </div>
         <div className="flex flex-col justify-center items-center my-10">
           <div className="w-96 text-xl text-center">
             Generate browser benchmarks for Semaphore V3 and Semaphore V4.

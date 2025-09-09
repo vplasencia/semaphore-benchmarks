@@ -74,4 +74,4 @@ template Semaphore(MAX_DEPTH) {
     signal dummySquare <== message * message;
 }
 
-component main {public [message, scope]} = Semaphore(10);
+component main {public [message, scope]} = Semaphore(20);

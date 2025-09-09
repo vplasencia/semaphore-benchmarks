@@ -418,12 +418,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zk-kit/circuits@npm:^1.0.0-beta":
-  version: 1.0.0-beta
-  resolution: "@zk-kit/circuits@npm:1.0.0-beta"
+"@zk-kit/binary-merkle-root.circom@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@zk-kit/binary-merkle-root.circom@npm:2.0.0"
   dependencies:
     circomlib: "npm:^2.0.5"
-  checksum: 10/9f33a59d8cd7fc711f05f762ae40ca3a908c89b3dd13dbc483c3b41016863fd79a36d0483d00764cf987d7e24acb264f2913c0b1276b9acca6af186f9a7cd0c5
+  checksum: 10/e26eaf1553263475c91220124985ea82f8f57c64dd611188427d6bedaaaed14b05f44760af8bf89cd2cbbdca5b54f06108cdd9a335a6e26617887a9e2e42be43
   languageName: node
   linkType: hard
 
@@ -862,10 +862,10 @@ __metadata:
     "@types/snarkjs": "npm:^0"
     "@typescript-eslint/eslint-plugin": "npm:^6.18.1"
     "@typescript-eslint/parser": "npm:^6.18.1"
-    "@zk-kit/circuits": "npm:^1.0.0-beta"
+    "@zk-kit/binary-merkle-root.circom": "npm:^2.0.0"
     chai: "npm:^4.4.0"
     circom_tester: "npm:^0.0.20"
-    circomlib: "npm:^2.0.5"
+    circomlib: "npm:2.0.5"
     eslint: "npm:^8.56.0"
     eslint-config-airbnb-base: "npm:^15.0.0"
     eslint-config-airbnb-typescript: "npm:^17.1.0"
@@ -916,7 +916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"circomlib@npm:^2.0.5":
+"circomlib@npm:2.0.5, circomlib@npm:^2.0.5":
   version: 2.0.5
   resolution: "circomlib@npm:2.0.5"
   checksum: 10/eb9413d2deb5664345c5a74b293d18ffd89c92262d403bdb568a2294f80fc6b0d300f54252607d57c2fc7f6732c62d017ed417eea385fa0d36a82a9937a1a790

@@ -21,7 +21,7 @@
   },
   {
     "Function": "V4 - Add Member 10 Members",
-    "Gas Units": 164262
+    "Gas Units": 151690
   },
   {
     "Function": "V3 - Add Member 30 Members",
@@ -29,7 +29,7 @@
   },
   {
     "Function": "V4 - Add Member 30 Members",
-    "Gas Units": 226677
+    "Gas Units": 177557
   },
   {
     "Function": "V3 - Add Members 10 Members",
@@ -37,7 +37,7 @@
   },
   {
     "Function": "V4 - Add Members 10 Members",
-    "Gas Units": 745021
+    "Gas Units": 741325
   },
   {
     "Function": "V3 - Add Members 30 Members",
@@ -45,7 +45,7 @@
   },
   {
     "Function": "V4 - Add Members 30 Members",
-    "Gas Units": 1895158
+    "Gas Units": 1884082
   },
   {
     "Function": "V3 - Verify Proof 10 Members",
@@ -53,7 +53,7 @@
   },
   {
     "Function": "V4 - Validate Proof 10 Members",
-    "Gas Units": 285622
+    "Gas Units": 285589
   },
   {
     "Function": "V3 - Verify Proof 30 Members",
@@ -61,6 +61,6 @@
   },
   {
     "Function": "V4 - Validate Proof 30 Members",
-    "Gas Units": 285598
+    "Gas Units": 285541
   }
 ]

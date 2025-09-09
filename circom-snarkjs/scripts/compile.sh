@@ -26,4 +26,4 @@ rm -r -f ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}
 
 # Compile the circuit
-circom ${PATH_CIRCUIT}/${CIRCUIT}.circom --r1cs --wasm --sym --c -o ${BUILD_DIR} -l ./node_modules/@zk-kit/circuits/circom -l ./node_modules/circomlib/circuits
+circom ${PATH_CIRCUIT}/${CIRCUIT}.circom --r1cs --wasm --sym --c --O2 -o ${BUILD_DIR} -l ./node_modules/@zk-kit/binary-merkle-root.circom/src -l ./node_modules/circomlib/circuits

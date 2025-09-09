@@ -1,6 +1,6 @@
 pragma circom 2.0.0;
 
-include "../../node_modules/circomlib/circuits/poseidon.circom";
+include "poseidon.circom";
 include "./tree.circom";
 
 template CalculateSecret() {
@@ -87,4 +87,4 @@ template Semaphore(nLevels) {
     nullifierHash <== calculateNullifierHash.out;
 }
 
-component main {public [signalHash, externalNullifier]} = Semaphore(20);
+component main {public [signalHash, externalNullifier]} = Semaphore(10);
